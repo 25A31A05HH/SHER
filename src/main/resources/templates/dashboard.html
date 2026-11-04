@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHER | Security Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <div>
+                <h2>SHER</h2>
+                <span>SECURITY INTELLIGENCE</span>
+            </div>
+        </div>
+
+        <div class="menu-label">WORKSPACE</div>
+
+        <nav>
+            <a class="nav-item active" th:href="@{/}">
+                <span>▦</span> Dashboard
+            </a>
+            <a class="nav-item" th:href="@{/scanner}">
+                <span>⌕</span> URL Scanner
+            </a>
+            <a class="nav-item" th:href="@{/history}">
+                <span>◷</span> Scan History
+            </a>
+            <a class="nav-item" th:href="@{/analytics}">
+                <span>▥</span> Analytics
+            </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="status-dot"></div>
+            <span>SHER SYSTEM ONLINE</span>
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <span class="breadcrumb">WORKSPACE / OVERVIEW</span>
+                <h1>Security Overview</h1>
+            </div>
+
+            <div class="topbar-right">
+                <span class="system-status">
+                    <span class="status-dot"></span>
+                    System Operational
+                </span>
+                <div class="avatar">T</div>
+            </div>
+        </header>
+
+        <section class="welcome-section">
+            <div>
+                <span class="eyebrow">SMART HAZARD EVALUATION & RESPONSE</span>
+                <h2>See the Threat. <span>Stay Ahead.</span></h2>
+                <p>
+                    Monitor suspicious URLs, evaluate potential threats,
+                    and understand your security posture.
+                </p>
+            </div>
+
+            <a class="primary-button" th:href="@{/scanner}">
+                + Scan a URL
+            </a>
+        </section>
+
+        <section class="metrics-grid">
+
+            <article class="metric-card">
+                <div class="metric-heading">
+                    <span>Total Scans</span>
+                    <span class="metric-icon">⌕</span>
+                </div>
+                <h3>--</h3>
+                <p>All recorded scans</p>
+            </article>
+
+            <article class="metric-card">
+                <div class="metric-heading">
+                    <span>Low Apparent Risk</span>
+                    <span class="metric-icon green">✓</span>
+                </div>
+                <h3>--</h3>
+                <p>Low-risk classifications</p>
+            </article>
+
+            <article class="metric-card">
+                <div class="metric-heading">
+                    <span>Suspicious</span>
+                    <span class="metric-icon yellow">!</span>
+                </div>
+                <h3>--</h3>
+                <p>Requires further review</p>
+            </article>
+
+            <article class="metric-card">
+                <div class="metric-heading">
+                    <span>High Apparent Risk</span>
+                    <span class="metric-icon red">⚠</span>
+                </div>
+                <h3>--</h3>
+                <p>High-risk classifications</p>
+            </article>
+
+        </section>
+
+        <section class="content-grid">
+
+            <article class="panel scanner-panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">THREAT DETECTION</span>
+                        <h3>Quick URL Analysis</h3>
+                    </div>
+                    <span class="live-label">● READY</span>
+                </div>
+
+                <p class="panel-description">
+                    Enter a website URL to evaluate its suspicious characteristics.
+                </p>
+
+                <form th:action="@{/scanner}" method="get">
+                    <label for="url">Website URL</label>
+                    <div class="input-wrapper">
+                        <span>⌕</span>
+                        <input
+                            id="url"
+                            name="url"
+                            type="url"
+                            placeholder="https://example.com"
+                            required>
+                    </div>
+
+                    <button class="primary-button scan-button" type="submit">
+                        Analyze URL →
+                    </button>
+                </form>
+
+                <p class="privacy-note">
+                    SHER analyzes URL characteristics without opening the submitted destination.
+                </p>
+            </article>
+
+            <article class="panel activity-panel">
+                <div class="panel-heading">
+                    <div>
+                        <span class="eyebrow">MONITORING</span>
+                        <h3>Recent Activity</h3>
+                    </div>
+                    <a th:href="@{/history}">View all →</a>
+                </div>
+
+                <div class="empty-state">
+                    <div class="empty-icon">◷</div>
+                    <h4>No scan activity yet</h4>
+                    <p>Your recent scan records will appear here.</p>
+                </div>
+            </article>
+
+        </section>
+
+        <footer>
+            <span>SHER © 2026</span>
+            <span>Smart Hazard Evaluation & Response</span>
+            <span>See the Threat. Stay Ahead.</span>
+        </footer>
+
+    </main>
+</div>
+
+</body>
+</html>
