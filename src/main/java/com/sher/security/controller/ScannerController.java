@@ -1,14 +1,22 @@
-
 package com.sher.security.controller;
 
+import com.sher.security.analyzer.UrlAnalysisResult;
+import com.sher.security.analyzer.UrlAnalyzerService;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class ScannerController {
+
+    private final UrlAnalyzerService urlAnalyzerService;
+
+    public ScannerController(UrlAnalyzerService urlAnalyzerService) {
+        this.urlAnalyzerService = urlAnalyzerService;
+    }
 
     @GetMapping("/scanner")
     public String scannerPage() {
@@ -18,17 +26,18 @@ public class ScannerController {
     @PostMapping("/scanner")
     public String submitUrl(
             @RequestParam("url") String url,
-            RedirectAttributes redirectAttributes) {
+            Model model) {
 
-        if (url == null || url.isBlank() || url.length() > 2048) {
-            redirectAttributes.addFlashAttribute(
-                    "error", "Please enter a valid URL.");
-            return "redirect:/scanner";
+        try {
+            UrlAnalysisResult result = urlAnalyzerService.analyze(url);
+            model.addAttribute("analysis", result);
+
+        } catch (IllegalArgumentException exception) {
+            model.addAttribute("error", exception.getMessage());
         }
 
-        redirectAttributes.addFlashAttribute(
-                "submittedUrl", url);
+        model.addAttribute("submittedUrl", url);
 
-        return "redirect:/scanner";
+        return "scanner";
     }
 }
