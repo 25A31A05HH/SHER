@@ -82,7 +82,49 @@
                     Start Security Analysis →
                 </button>
             </form>
+<div th:if="${error}" class="result-card">
+    <h3>Unable to Analyze URL</h3>
+    <p th:text="${error}"></p>
+</div>
 
+<div th:if="${analysis}" class="result-card">
+
+    <h2>Scan Results</h2>
+
+    <p>
+        <strong>Scanned URL:</strong>
+        <span th:text="${analysis.analyzedUrl}"></span>
+    </p>
+
+    <h3>
+        Risk Score:
+        <span th:text="${analysis.riskScore} + '/100'"></span>
+    </h3>
+
+    <h3>
+        Classification:
+        <span th:text="${analysis.classification}"></span>
+    </h3>
+
+    <h3>Detected Indicators</h3>
+
+    <ul>
+        <li th:each="indicator : ${analysis.indicators}"
+            th:text="${indicator}">
+        </li>
+    </ul>
+
+    <h3>Recommendation</h3>
+
+    <p th:text="${analysis.recommendation}"></p>
+
+    <p>
+        <strong>Important:</strong>
+        This is a preliminary heuristic assessment, not a guarantee
+        that a website is safe or malicious.
+    </p>
+
+</div>
             <p class="privacy-note">
                 SHER evaluates the submitted URL without automatically opening the destination.
             </p>
