@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHER | URL Scanner</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="app-layout">
+
+    <aside class="sidebar">
+        <div class="brand">
+            <div class="brand-icon">S</div>
+            <div>
+                <h2>SHER</h2>
+                <span>SECURITY INTELLIGENCE</span>
+            </div>
+        </div>
+
+        <div class="menu-label">WORKSPACE</div>
+
+        <nav>
+            <a class="nav-item" th:href="@{/}">▦ Dashboard</a>
+            <a class="nav-item active" th:href="@{/scanner}">⌕ URL Scanner</a>
+            <a class="nav-item" th:href="@{/history}">◷ Scan History</a>
+            <a class="nav-item" th:href="@{/analytics}">▥ Analytics</a>
+        </nav>
+
+        <div class="sidebar-bottom">
+            <div class="status-dot"></div>
+            SHER SYSTEM ONLINE
+        </div>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="topbar">
+            <div>
+                <span class="breadcrumb">WORKSPACE / URL ANALYSIS</span>
+                <h1>URL Security Scanner</h1>
+            </div>
+            <a class="primary-button" th:href="@{/}">← Dashboard</a>
+        </header>
+
+        <section class="welcome-section">
+            <div>
+                <span class="eyebrow">THREAT DETECTION ENGINE</span>
+                <h2>Analyze before you <span>trust.</span></h2>
+                <p>
+                    Evaluate URLs for suspicious patterns and potential phishing indicators.
+                </p>
+            </div>
+        </section>
+
+        <section class="panel scanner-panel">
+            <div class="panel-heading">
+                <div>
+                    <span class="eyebrow">URL INSPECTION</span>
+                    <h3>Enter website address</h3>
+                </div>
+                <span class="live-label">● READY</span>
+            </div>
+
+            <form th:action="@{/scanner}" method="post">
+                <label for="url">Website URL</label>
+
+                <div class="input-wrapper">
+                    <span>⌕</span>
+                    <input
+                        id="url"
+                        name="url"
+                        type="text"
+                        maxlength="2048"
+                        placeholder="https://example.com"
+                        required>
+                </div>
+
+                <button class="primary-button scan-button" type="submit">
+                    Start Security Analysis →
+                </button>
+            </form>
+
+            <p class="privacy-note">
+                SHER evaluates the submitted URL without automatically opening the destination.
+            </p>
+        </section>
+
+        <section class="panel" style="margin-top: 22px;">
+            <span class="eyebrow">ANALYSIS INFORMATION</span>
+            <h3 style="margin-top: 10px;">What SHER examines</h3>
+            <p class="panel-description" style="margin-top: 15px;">
+                Domain structure, suspicious keywords, unusual URL patterns,
+                IP-address hosts, and other explainable risk indicators.
+            </p>
+        </section>
+
+    </main>
+</div>
+
+</body>
+</html>
